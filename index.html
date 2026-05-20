@@ -482,8 +482,141 @@ a:hover { border-bottom-color: var(--rose); color: var(--rose); }
   letter-spacing: 0.02em;
 }
 
+/* HERO BACKDROP IMAGE */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+  opacity: 0.16;
+}
+
+.hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 78% 12%, rgba(201, 169, 110, 0.16), transparent 62%),
+    linear-gradient(165deg, rgba(250, 246, 240, 0.86) 0%, rgba(244, 237, 226, 0.9) 58%, rgba(245, 230, 223, 0.92) 100%);
+}
+
 /* SECTION */
 section { padding: var(--section-pad) 0; }
+
+/* BRAND BAND (full-width photo with overlay) */
+.brand-band {
+  position: relative;
+  min-height: 460px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: var(--ivory);
+  padding: 96px 0;
+}
+
+.brand-band .brand-band-img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.brand-band .brand-band-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 38%;
+  display: block;
+}
+
+.brand-band .brand-band-img::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, rgba(66, 31, 46, 0.82) 0%, rgba(90, 42, 63, 0.62) 48%, rgba(90, 42, 63, 0.28) 100%);
+}
+
+.brand-band .container { position: relative; z-index: 2; }
+
+.brand-band-inner { max-width: 600px; }
+.brand-band .section-eyebrow { color: var(--gold-soft); }
+.brand-band h2 { color: var(--ivory); margin-bottom: 18px; }
+.brand-band p { color: var(--blush); font-size: 18px; line-height: 1.75; margin-bottom: 0; }
+.brand-band .divider { background: linear-gradient(90deg, var(--gold-soft), var(--rose-soft)); }
+
+/* SERVICE CARD PHOTO THUMBNAIL */
+.service-thumb {
+  position: relative;
+  margin: -40px -36px 24px;
+  height: 188px;
+  overflow: hidden;
+  border-top-left-radius: var(--radius-lg);
+  border-top-right-radius: var(--radius-lg);
+}
+
+.service-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 700ms var(--ease);
+}
+
+.service-thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(66, 31, 46, 0.2) 100%);
+}
+
+.service-card:hover .service-thumb img { transform: scale(1.07); }
+
+/* GALLERY STRIP */
+.gallery { background: var(--ivory-warm); }
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  aspect-ratio: 4 / 5;
+  box-shadow: var(--shadow-sm);
+}
+
+.gallery-item.wide { aspect-ratio: 4 / 5; }
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 900ms var(--ease);
+}
+
+.gallery-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(200deg, transparent 60%, rgba(66, 31, 46, 0.18) 100%);
+  opacity: 0;
+  transition: opacity 400ms var(--ease);
+}
+
+.gallery-item:hover img { transform: scale(1.06); }
+.gallery-item:hover::after { opacity: 1; }
 
 .section-eyebrow {
   margin-bottom: 16px;
@@ -1176,6 +1309,8 @@ section { padding: var(--section-pad) 0; }
   .header-inner, .site-header.scrolled .header-inner { padding: 16px 24px; }
   .container { padding: 0 24px; }
   .team-row { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .brand-band { min-height: 380px; padding: 72px 0; }
   .reviews-band { padding: 52px 28px; }
   .location-cta { padding: 40px 26px; }
   .hero-badge { left: 0; bottom: -22px; }
@@ -1227,6 +1362,9 @@ section { padding: var(--section-pad) 0; }
 </header>
 
 <section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.squarespace-cdn.com/content/v1/624b58005c0d717cdd006e48/cf02a19a-d2d8-4434-909d-b83d9b153ca6/Ren-Rejuvenation-Branding-05437.jpg" alt="The REN Rejuvenation Bar studio in De Pere, Wisconsin" loading="eager">
+  </div>
   <span class="hero-orb a"></span>
   <span class="hero-orb b"></span>
   <div class="container">
@@ -1246,7 +1384,7 @@ section { padding: var(--section-pad) 0; }
       </div>
       <div class="hero-visual reveal" data-delay="2">
         <figure class="hero-image">
-          <img src="https://images.squarespace-cdn.com/content/v1/624b58005c0d717cdd006e48/3eba6266-a6a8-4d7e-b66e-abb8df4e4f78/IMG_0174+2.jpg" alt="The treatment space at REN Rejuvenation Bar in De Pere, Wisconsin">
+          <img src="https://images.squarespace-cdn.com/content/v1/624b58005c0d717cdd006e48/07419e45-540f-4a39-9557-16a1afff674c/Ren-Rejuvenation-Branding-05595.jpg" alt="A registered nurse performing a treatment at REN Rejuvenation Bar in De Pere, Wisconsin" loading="eager">
         </figure>
         <div class="hero-badge">
           <span class="ring">5.0</span>
@@ -1280,11 +1418,25 @@ section { padding: var(--section-pad) 0; }
   </div>
 </section>
 
+<section class="brand-band">
+  <div class="brand-band-img">
+    <img src="https://images.squarespace-cdn.com/content/v1/624b58005c0d717cdd006e48/8fd67f34-8eca-489b-a854-8398e7be75bb/Ren-Rejuvenation-Branding-05014.jpg" alt="The calm, clinical treatment space at REN Rejuvenation Bar in De Pere, Wisconsin" loading="lazy">
+  </div>
+  <div class="container">
+    <div class="brand-band-inner reveal">
+      <span class="section-eyebrow">Inside REN</span>
+      <hr class="divider">
+      <h2>A calm room, an unhurried hour.</h2>
+      <p>No conveyor belt, no rushed appointments. REN is a quiet, clean studio built for one thing: time with a nurse who actually looks at your face and listens before anything else happens.</p>
+    </div>
+  </div>
+</section>
+
 <section class="about" id="about">
   <div class="container">
     <div class="about-grid">
       <figure class="about-image reveal">
-        <img src="https://images.squarespace-cdn.com/content/v1/624b58005c0d717cdd006e48/d9dd5c0e-9653-41be-b9e8-7b00c46d815d/IMG_2072.JPG" alt="Jess Sharkey and Markie, RN co-owners of REN Rejuvenation Bar">
+        <img src="https://images.squarespace-cdn.com/content/v1/624b58005c0d717cdd006e48/ee1fbba3-1a6e-4d99-9bff-425167234d16/Ren-Rejuvenation-Branding-05676.jpg" alt="The registered nurse co-owners of REN Rejuvenation Bar in De Pere, Wisconsin" loading="lazy">
       </figure>
       <div class="about-body reveal" data-delay="1">
         <span class="section-eyebrow">Our Story</span>
@@ -1325,6 +1477,9 @@ section { padding: var(--section-pad) 0; }
     <div class="services-grid">
 
       <article class="service-card reveal">
+        <figure class="service-thumb">
+          <img src="https://images.squarespace-cdn.com/content/v1/624b58005c0d717cdd006e48/1f5f6146-4c15-41f3-b4c5-41b0619d985b/Ren-Rejuvenation-Branding-05550.jpg" alt="Neurotoxin injection treatment at REN Rejuvenation Bar" loading="lazy">
+        </figure>
         <div class="service-icon">
           <svg viewBox="0 0 24 24"><path d="M5 19c4-1 6-4 7-9 1 5 3 8 7 9" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 4v6" stroke-linecap="round"/><circle cx="12" cy="3" r="1.4" fill="currentColor" stroke="none"/></svg>
         </div>
@@ -1338,6 +1493,9 @@ section { padding: var(--section-pad) 0; }
       </article>
 
       <article class="service-card reveal" data-delay="1">
+        <figure class="service-thumb">
+          <img src="https://images.squarespace-cdn.com/content/v1/624b58005c0d717cdd006e48/49db9290-0dc3-485a-a243-08dde55878de/Ren-Rejuvenation-Branding-05460.jpg" alt="Dermal filler treatment at REN Rejuvenation Bar" loading="lazy">
+        </figure>
         <div class="service-icon">
           <svg viewBox="0 0 24 24"><path d="M12 21c4.5-3 7-6.5 7-10a7 7 0 0 0-14 0c0 3.5 2.5 7 7 10z" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="11" r="2.4"/></svg>
         </div>
@@ -1352,6 +1510,9 @@ section { padding: var(--section-pad) 0; }
       </article>
 
       <article class="service-card reveal" data-delay="2">
+        <figure class="service-thumb">
+          <img src="https://images.squarespace-cdn.com/content/v1/624b58005c0d717cdd006e48/26d97a23-82cd-4a02-bce1-3fd11239deb0/Ren-Rejuvenation-Branding-05091.jpg" alt="Sculptra biostimulator treatment at REN Rejuvenation Bar" loading="lazy">
+        </figure>
         <div class="service-icon">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M8 12h8" stroke-linecap="round"/><path d="M12 4v2M12 18v2M4 12h2M18 12h2" stroke-linecap="round"/></svg>
         </div>
@@ -1364,6 +1525,9 @@ section { padding: var(--section-pad) 0; }
       </article>
 
       <article class="service-card reveal">
+        <figure class="service-thumb">
+          <img src="https://images.squarespace-cdn.com/content/v1/624b58005c0d717cdd006e48/92a9a034-2dde-4b0c-b0bc-5e1724036975/Ren-Rejuvenation-Branding-05237.jpg" alt="RF microneedling skin treatment at REN Rejuvenation Bar" loading="lazy">
+        </figure>
         <div class="service-icon">
           <svg viewBox="0 0 24 24"><path d="M12 3v6M12 15v6M3 12h6M15 12h6" stroke-linecap="round"/><circle cx="12" cy="12" r="2.6"/></svg>
         </div>
@@ -1377,6 +1541,9 @@ section { padding: var(--section-pad) 0; }
       </article>
 
       <article class="service-card reveal" data-delay="1">
+        <figure class="service-thumb">
+          <img src="https://images.squarespace-cdn.com/content/v1/624b58005c0d717cdd006e48/28a03ff3-973c-4ca2-bd72-a7d704431b9f/IMG_0046+2.jpg" alt="Aerolase laser treatment at REN Rejuvenation Bar" loading="lazy">
+        </figure>
         <div class="service-icon">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2" stroke-linecap="round"/></svg>
         </div>
@@ -1416,6 +1583,31 @@ section { padding: var(--section-pad) 0; }
 
     </div>
     <p class="services-note reveal">Not sure where to start? Book a consultation and we will build a plan together.</p>
+  </div>
+</section>
+
+<section class="gallery">
+  <div class="container">
+    <div class="section-head center reveal">
+      <span class="section-eyebrow">The Studio</span>
+      <hr class="divider">
+      <h2>A look around REN</h2>
+      <p>Real moments from our De Pere studio. The space, the team, and the unhurried care our patients come back for.</p>
+    </div>
+    <div class="gallery-grid">
+      <figure class="gallery-item reveal">
+        <img src="https://images.squarespace-cdn.com/content/v1/624b58005c0d717cdd006e48/3eba6266-a6a8-4d7e-b66e-abb8df4e4f78/IMG_0174+2.jpg" alt="The treatment space at REN Rejuvenation Bar in De Pere, Wisconsin" loading="lazy">
+      </figure>
+      <figure class="gallery-item reveal" data-delay="1">
+        <img src="https://images.squarespace-cdn.com/content/v1/624b58005c0d717cdd006e48/d9dd5c0e-9653-41be-b9e8-7b00c46d815d/IMG_2072.JPG" alt="The registered nurse team at REN Rejuvenation Bar" loading="lazy">
+      </figure>
+      <figure class="gallery-item reveal" data-delay="2">
+        <img src="https://images.squarespace-cdn.com/content/v1/624b58005c0d717cdd006e48/cf02a19a-d2d8-4434-909d-b83d9b153ca6/Ren-Rejuvenation-Branding-05437.jpg" alt="Branded interior detail at REN Rejuvenation Bar" loading="lazy">
+      </figure>
+      <figure class="gallery-item reveal" data-delay="3">
+        <img src="https://images.squarespace-cdn.com/content/v1/624b58005c0d717cdd006e48/07419e45-540f-4a39-9557-16a1afff674c/Ren-Rejuvenation-Branding-05595.jpg" alt="A registered nurse caring for a patient at REN Rejuvenation Bar" loading="lazy">
+      </figure>
+    </div>
   </div>
 </section>
 
